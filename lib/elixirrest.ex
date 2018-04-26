@@ -1,33 +1,24 @@
-defmodule Elixirrest do
+defmodule Elixirrest.Router.Homepage do
   use Maru.Router
 
-  def start(_type, _args) do
-    import Supervisor.Spec, warn: false
-
-    children = [
-      worker(Elixirrest.Agent, [])
-    ]
-
-    opts = [strategy: :one_for_one, name: Elixirrest.Supervisor]
-    Supervisor.start_link(children, opts)
+  get do
+    json(conn, %{ hello: :world })
   end
+end
 
+defmodule Elixirrest.API do
+  use Maru.Router
 
-  @moduledoc """
-  Documentation for Elixirrest.
-  """
+  plug Plug.Parsers,
+    pass: ["*/*"],
+    json_decoder: Poison,
+    parsers: [:urlencoded, :json, :multipart]
 
-  @doc """
-  Hello world.
+  mount Elixirrest.Router.Homepage
 
-  ## Examples
-
-      iex> Elixirrest.hello
-      :world
-
-  """
-  def hello do
-    :world
+  rescue_from :all do
+    conn
+    |> put_status(500)
+    |> text("Server Error")
   end
-
 end

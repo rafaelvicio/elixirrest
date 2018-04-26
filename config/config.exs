@@ -2,8 +2,8 @@
 # and its dependencies with the aid of the Mix.Config module.
 use Mix.Config
 
-config :maru, Elixirrest.Api,
-http: [port: 3030]
+config :maru, MyAPP.API,
+    http: [port: 8880]
 
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this
