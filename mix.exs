@@ -20,6 +20,9 @@ defmodule Elixirrest.MixProject do
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
-    [ {:maru, "~> 0.11"} ]
+    [ {:maru, "~> 0.13"},
+      {:cowboy, "~> 2.3"},
+      {:jason, "~> 1.0"}
+    ]
   end
 end
