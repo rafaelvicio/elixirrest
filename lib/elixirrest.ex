@@ -21,4 +21,5 @@ defmodule Elixirrest.API do
     |> put_status(500)
     |> text("Server Error")
   end
+
 end
